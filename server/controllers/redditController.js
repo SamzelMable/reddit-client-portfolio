@@ -1,25 +1,21 @@
 import { fetchSubredditPosts, fetchPostDetails } from '../services/redditService.js';
 
-// Controller for subreddit posts
+// /api/subreddit/:subreddit
 export const getSubredditPosts = async (req, res) => {
-  const { name } = req.params;
   try {
-    const posts = await fetchSubredditPosts(name);
+    const posts = await fetchSubredditPosts(req.params.subreddit);
     res.json(posts);
-  } catch (error) {
-    console.error('❌ Error fetching subreddit posts:', error.message);
-    res.status(500).json({ error: 'Failed to fetch subreddit posts' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
-// Controller for post details
+// /api/post/:postId
 export const getPostDetails = async (req, res) => {
-  const { id } = req.params;
   try {
-    const post = await fetchPostDetails(id);
-    res.json(post);
-  } catch (error) {
-    console.error('❌ Error fetching post details:', error.message);
-    res.status(500).json({ error: 'Failed to fetch post details' });
+    const postData = await fetchPostDetails(req.params.postId);
+    res.json(postData);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };

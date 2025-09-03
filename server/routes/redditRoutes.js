@@ -3,10 +3,10 @@ import { getSubredditPosts, getPostDetails } from '../controllers/redditControll
 
 const router = express.Router();
 
-// GET /api/subreddit/:name
-router.get('/subreddit/:name', getSubredditPosts);
+// Get posts from subreddit
+router.get('/subreddit/:subreddit', getSubredditPosts);
 
-// GET /api/post/:id
-router.get('/post/:id', getPostDetails);
+// Get post details & comments
+router.get('/post/:postId', getPostDetails);
 
 export default router;
