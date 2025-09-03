@@ -10,6 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/r/:subreddit" element={<HomePage />} /> {/* new route */}
         <Route path="/post/:id" element={<PostDetailPage />} />
       </Routes>
     </div>

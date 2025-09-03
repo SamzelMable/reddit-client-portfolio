@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchPosts } from '../../features/posts/postsSlice';
+import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
 const SearchBar = () => {
   const [subreddit, setSubreddit] = useState('');
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!subreddit.trim()) return;
-    dispatch(fetchPosts(subreddit.trim()));
+    const trimmed = subreddit.trim();
+    if (!trimmed) return;
+    // navigate to /r/<subreddit>, HomePage will fetch automatically
+    navigate(`/r/${trimmed}`);
     setSubreddit('');
   };
 

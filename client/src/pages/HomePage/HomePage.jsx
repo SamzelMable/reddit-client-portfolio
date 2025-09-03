@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { fetchPosts } from '../../features/posts/postsSlice';
 import PostList from '../../components/PostList/PostList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -7,22 +8,18 @@ import './HomePage.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { items: posts, status, error } = useSelector((state) => state.posts);
+  const { subreddit } = useParams(); // get subreddit from URL
+  const currentSubreddit = subreddit || 'popular';
 
   useEffect(() => {
-    // Load default subreddit
-    dispatch(fetchPosts('popular'));
-  }, [dispatch]);
+    dispatch(fetchPosts(currentSubreddit));
+  }, [dispatch, currentSubreddit]);
 
   return (
     <div className="home-page">
       <h1>Reddit Client</h1>
       <SearchBar />
-
-      {status === 'loading' && <p>Loading posts...</p>}
-      {status === 'failed' && <p>Error: {error}</p>}
-
-      {status === 'succeeded' && <PostList posts={posts} />}
+      <PostList subreddit={currentSubreddit} />
     </div>
   );
 };
