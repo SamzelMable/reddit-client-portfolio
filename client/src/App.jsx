@@ -1,19 +1,11 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
-import HomePage from './pages/HomePage/HomePage';
-import PostDetailPage from './pages/PostDetailPage/PostDetailPage';
+import ReactDOM from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
+import App from './App';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/post/:id" element={<PostDetailPage />} />
-      </Routes>
-    </div>
-  );
-}
-
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <HashRouter>
+    <App />
+  </HashRouter>
+);
