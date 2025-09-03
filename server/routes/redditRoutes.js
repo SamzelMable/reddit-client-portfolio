@@ -1,24 +1,12 @@
 import express from 'express';
-import { fetchSubredditPosts, fetchPostDetails } from '../services/redditService.js';
+import { getSubredditPosts, getPostDetails } from '../controllers/redditController.js';
 
 const router = express.Router();
 
-router.get('/subreddit/:subreddit', async (req, res) => {
-  try {
-    const posts = await fetchSubredditPosts(req.params.subreddit);
-    res.json(posts);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// GET /api/subreddit/:subreddit
+router.get('/subreddit/:subreddit', getSubredditPosts);
 
-router.get('/post/:postId', async (req, res) => {
-  try {
-    const data = await fetchPostDetails(req.params.postId);
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// GET /api/post/:postId
+router.get('/post/:postId', getPostDetails);
 
 export default router;

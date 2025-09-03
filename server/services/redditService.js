@@ -1,28 +1,61 @@
 import axios from 'axios';
+import qs from 'qs';
 
-const REDDIT_HEADERS = {
-  'User-Agent': process.env.REDDIT_USER_AGENT,
+const getAccessToken = async () => {
+  try {
+    const auth = Buffer.from(`${process.env.REDDIT_CLIENT_ID}:${process.env.REDDIT_CLIENT_SECRET}`).toString('base64');
+
+    const response = await axios.post(
+      'https://www.reddit.com/api/v1/access_token',
+      qs.stringify({ grant_type: 'client_credentials' }),
+      {
+        headers: {
+          Authorization: `Basic ${auth}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    return response.data.access_token;
+  } catch (err) {
+    console.error('Error fetching Reddit access token:', err.message);
+    throw new Error('Unable to authenticate with Reddit API');
+  }
 };
 
 export const fetchSubredditPosts = async (subreddit) => {
   try {
-    const url = `https://www.reddit.com/r/${subreddit}.json`;
-    const response = await axios.get(url, { headers: REDDIT_HEADERS });
-    return response.data.data.children.map(child => child.data);
+    const token = await getAccessToken();
+    const response = await axios.get(`https://oauth.reddit.com/r/${subreddit}/hot`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'User-Agent': 'reddit-client-app/1.0 (by SamzelMable)',
+      },
+    });
+
+    return response.data.data.children.map((child) => child.data);
   } catch (err) {
-    throw new Error('Failed to fetch posts: ' + err.message);
+    console.error('Error fetching subreddit posts:', err.message);
+    throw new Error('Failed to fetch posts from Reddit');
   }
 };
 
 export const fetchPostDetails = async (postId) => {
   try {
-    const url = `https://www.reddit.com/comments/${postId}.json`;
-    const response = await axios.get(url, { headers: REDDIT_HEADERS });
+    const token = await getAccessToken();
+    const response = await axios.get(`https://oauth.reddit.com/comments/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'User-Agent': 'reddit-client-app/1.0 (by SamzelMable)',
+      },
+    });
+
     return {
       post: response.data[0].data.children[0].data,
-      comments: response.data[1].data.children.map(child => child.data),
+      comments: response.data[1].data.children.map((child) => child.data),
     };
   } catch (err) {
-    throw new Error('Failed to fetch post details: ' + err.message);
+    console.error('Error fetching post details:', err.message);
+    throw new Error('Failed to fetch post details from Reddit');
   }
 };
