@@ -3,7 +3,9 @@ import axios from 'axios';
 // Common headers for Reddit API
 const REDDIT_HEADERS = {
   'User-Agent': 'reddit-client-app/1.0 (by SamzelMable)',
+  'Accept': 'application/json',
 };
+
 
 // Fetch subreddit posts
 export const fetchSubredditPosts = async (subreddit) => {
