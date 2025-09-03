@@ -20,6 +20,8 @@ const PostDetailPage = () => {
     };
   }, [dispatch, id]);
 
+  const defaultAvatar = "https://www.redditstatic.com/avatars/avatar_default_02_24A0ED.png";
+
   return (
     <div className="post-detail-page">
       <button className="back-button" onClick={() => navigate(-1)}>
@@ -30,18 +32,17 @@ const PostDetailPage = () => {
         <>
           <PostContentSkeleton />
           <h4>Comments</h4>
-      <ul className="comments-list">
-        {Array(3).fill().map((_, i) => (
-          <li key={i} className="comment-skeleton">
-            <div className="comment-skeleton-header">
-              <div className="skeleton-text small author"></div>
-              <div className="skeleton-text small upvotes"></div>
-        </div>
-        <div className="skeleton-text body"></div>
-    </li>
-  ))}
-</ul>
-
+          <ul className="comments-list">
+            {Array(3).fill().map((_, i) => (
+              <li key={i} className="comment-skeleton">
+                <div className="comment-skeleton-header">
+                  <div className="skeleton-avatar"></div>
+                  <div className="skeleton-text small author"></div>
+                </div>
+                <div className="skeleton-text body"></div>
+              </li>
+            ))}
+          </ul>
         </>
       ) : status === 'failed' ? (
         <p>Error: {error}</p>
@@ -52,7 +53,15 @@ const PostDetailPage = () => {
           <ul className="comments-list">
             {comments.map((comment) => (
               <li key={comment.id} className="comment">
-                <p><strong>{comment.author}</strong>: {comment.body}</p>
+                <img
+                  src={comment.icon_img || defaultAvatar}
+                  alt={comment.author}
+                  className="comment-avatar"
+                />
+                <div className="comment-content">
+                  <p className="comment-author">{comment.author}</p>
+                  <p className="comment-body">{comment.body}</p>
+                </div>
               </li>
             ))}
           </ul>

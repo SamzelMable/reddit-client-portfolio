@@ -20,7 +20,7 @@ const SearchBar = () => {
       <input
         type="text"
         value={subreddit}
-        placeholder="Enter subreddit name"
+        placeholder="Search Reddit"
         onChange={(e) => setSubreddit(e.target.value)}
       />
       <button type="submit">Search</button>

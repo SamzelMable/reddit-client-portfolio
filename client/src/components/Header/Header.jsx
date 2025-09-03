@@ -4,7 +4,7 @@ import './Header.css';
 const Header = () => {
   return (
     <header className="header">
-      <h1>Reddit Client App</h1>
+      <h1>Reddit Minimalist</h1>
     </header>
   );
 };

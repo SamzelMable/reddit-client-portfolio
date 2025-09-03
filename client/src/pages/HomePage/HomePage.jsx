@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <h1>Reddit Client</h1>
+      <h1>/r/{currentSubreddit.charAt(0).toUpperCase() + currentSubreddit.slice(1)}</h1>
       <SearchBar />
       <PostList subreddit={currentSubreddit} />
     </div>
