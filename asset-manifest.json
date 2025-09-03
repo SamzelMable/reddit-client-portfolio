@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/reddit-client-portfolio/static/css/main.c5b57fcf.css",
+    "main.js": "/reddit-client-portfolio/static/js/main.a8afa518.js",
+    "index.html": "/reddit-client-portfolio/index.html",
+    "main.c5b57fcf.css.map": "/reddit-client-portfolio/static/css/main.c5b57fcf.css.map",
+    "main.a8afa518.js.map": "/reddit-client-portfolio/static/js/main.a8afa518.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5b57fcf.css",
+    "static/js/main.a8afa518.js"
+  ]
+}
