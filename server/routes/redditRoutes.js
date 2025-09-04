@@ -9,4 +9,7 @@ router.get('/subreddit/:subreddit', getSubredditPosts);
 // GET /api/post/:postId
 router.get('/post/:postId', getPostDetails);
 
+// GET /api/search-subreddits
+router.get('/search-subreddits', getSubredditSuggestions);
+
 export default router;

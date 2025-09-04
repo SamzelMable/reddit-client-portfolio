@@ -19,3 +19,13 @@ export const getPostDetails = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getSubredditSuggestions = async (req, res) => {
+  const { q } = req.query;
+  try {
+    const suggestions = await fetchSubredditSuggestions(q);
+    res.json(suggestions);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

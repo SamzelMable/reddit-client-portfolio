@@ -59,3 +59,14 @@ export const fetchPostDetails = async (postId) => {
     throw new Error('Failed to fetch post details from Reddit');
   }
 };
+
+export const fetchSubredditSuggestions = async (query) => {
+  const url = `https://www.reddit.com/subreddits/search.json?q=${query}&limit=5`;
+  const response = await axios.get(url);
+
+  return response.data.data.children.map((child) => ({
+    id: child.data.id,
+    name: child.data.display_name_prefixed,
+  }));
+};
+
