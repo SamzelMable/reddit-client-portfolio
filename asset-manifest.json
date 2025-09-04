@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/reddit-client-portfolio/static/css/main.fed286af.css",
-    "main.js": "/reddit-client-portfolio/static/js/main.8082a0fc.js",
+    "main.css": "/reddit-client-portfolio/static/css/main.d6d5cf73.css",
+    "main.js": "/reddit-client-portfolio/static/js/main.455b0374.js",
     "index.html": "/reddit-client-portfolio/index.html",
-    "main.fed286af.css.map": "/reddit-client-portfolio/static/css/main.fed286af.css.map",
-    "main.8082a0fc.js.map": "/reddit-client-portfolio/static/js/main.8082a0fc.js.map"
+    "main.d6d5cf73.css.map": "/reddit-client-portfolio/static/css/main.d6d5cf73.css.map",
+    "main.455b0374.js.map": "/reddit-client-portfolio/static/js/main.455b0374.js.map"
   },
   "entrypoints": [
-    "static/css/main.fed286af.css",
-    "static/js/main.8082a0fc.js"
+    "static/css/main.d6d5cf73.css",
+    "static/js/main.455b0374.js"
   ]
 }
