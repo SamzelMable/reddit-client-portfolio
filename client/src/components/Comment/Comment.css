@@ -1,3 +1,4 @@
+/* ================= Comments ================= */
 .comments-list {
   list-style: none;
   padding: 0;
@@ -5,12 +6,14 @@
 }
 
 .comment {
-  background-color: #f8f9fa;
-  padding: 0.5rem;
+  background-color: var(--secondary-bg); /* dark background */
+  color: var(--light-gray); /* readable text */
+  padding: 1rem; /* add padding inside the box */
   border-radius: 6px;
   margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
 }
-
 
 .comment-avatar {
   width: 40px;
@@ -26,13 +29,15 @@
 .comment-author {
   font-weight: bold;
   margin-bottom: 0.25rem;
+  color: var(--white); /* author stands out */
 }
 
 .comment-body {
   line-height: 1.4;
+  color: var(--light-gray); /* readable body text */
 }
 
-/* Skeleton styles */
+/* ================= Skeleton styles ================= */
 .comment-skeleton {
   display: flex;
   align-items: flex-start;
@@ -43,12 +48,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #555; /* darker for dark theme */
   margin-right: 0.75rem;
 }
 
 .skeleton-text {
-  background-color: #ccc;
+  background-color: #555; /* darker placeholder */
   border-radius: 4px;
 }
 
