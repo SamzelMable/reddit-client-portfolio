@@ -5,22 +5,20 @@ import PostCard from '../PostCard/PostCard';
 import PostSkeleton from '../PostSkeleton/PostSkeleton';
 import './PostList.css';
 
-const PostList = () => {
+const PostList = ({ subreddit }) => {
   const { items, status, error } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchPosts('popular')); // default to popular
+    if (subreddit) {
+      dispatch(fetchPosts(subreddit));
     }
-  }, [status, dispatch]);
+  }, [subreddit, dispatch]);
 
   if (status === 'loading') {
     return (
       <div className="post-list">
-        {Array(5).fill().map((_, i) => (
-          <PostSkeleton key={i} />
-        ))}
+        {Array(5).fill().map((_, i) => <PostSkeleton key={i} />)}
       </div>
     );
   }
@@ -29,9 +27,7 @@ const PostList = () => {
 
   return (
     <div className="post-list">
-      {items.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      {items.map((post) => <PostCard key={post.id} post={post} />)}
     </div>
   );
 };

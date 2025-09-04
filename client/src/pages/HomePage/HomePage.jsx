@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../features/posts/postsSlice';
 import PostList from '../../components/PostList/PostList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -8,8 +7,7 @@ import './HomePage.css';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { subreddit } = useParams(); // get subreddit from URL
-  const currentSubreddit = subreddit || 'popular';
+  const { currentSubreddit } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(fetchPosts(currentSubreddit));
@@ -19,7 +17,7 @@ const HomePage = () => {
     <div className="home-page">
       <h1>/r/{currentSubreddit.charAt(0).toUpperCase() + currentSubreddit.slice(1)}</h1>
       <SearchBar />
-      <PostList subreddit={currentSubreddit} />
+      <PostList />
     </div>
   );
 };
