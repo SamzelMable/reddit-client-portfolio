@@ -1,70 +1,170 @@
-# Getting Started with Create React App
+Reddit Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based Reddit client application that lets users browse subreddits, view posts, search with live subreddit suggestions, and read post details with comments.
 
-## Available Scripts
+The backend is built with Node.js & Express and is hosted on Render, while the frontend is hosted on GitHub Pages.
 
-In the project directory, you can run:
+🌟 Features
 
-### `npm start`
+Browse popular subreddits by default
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Live subreddit search suggestions like Google
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+View posts with:
 
-### `npm test`
+Images
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Upvotes
 
-### `npm run build`
+Number of comments
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Click on a post to view:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Full post content
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Comments with authors
 
-### `npm run eject`
+Back button support to return to the previous subreddit
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Skeleton UI for loading posts and comments
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Fully responsive for desktop and mobile
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Reddit OAuth for API requests
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🛠 Technologies Used
 
-## Learn More
+Frontend:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Redux & Redux Toolkit
 
-### Code Splitting
+React Router
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+CSS Modules
 
-### Analyzing the Bundle Size
+Backend:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Node.js & Express
 
-### Making a Progressive Web App
+Axios & node-fetch
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Reddit API with OAuth2 authentication
 
-### Advanced Configuration
+Deployment:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Frontend: GitHub Pages
 
-### Deployment
+Backend: Render
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+🗂 Project Structure
+reddit-client/
+│
+├─ client/                # React frontend
+│  ├─ src/
+│  │  ├─ components/      # PostCard, PostList, SearchBar, Skeletons
+│  │  ├─ features/        # Redux slices
+│  │  └─ App.js
+│  └─ package.json
+│
+└─ server/                # Node/Express backend
+   ├─ routes/             # API routes
+   ├─ controllers/        # Route handlers
+   ├─ services/           # Reddit API service functions
+   ├─ server.js
+   └─ package.json
 
-### `npm run build` fails to minify
+🚀 Getting Started
+Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Node.js v18+
+
+npm
+
+Git
+
+Frontend Setup
+
+Navigate to the client folder:
+
+cd client
+
+
+Install dependencies:
+
+npm install
+
+
+Run locally:
+
+npm start
+
+Backend Setup
+
+Navigate to the server folder:
+
+cd server
+
+
+Install dependencies:
+
+npm install
+
+
+Create a .env file with:
+
+REDDIT_CLIENT_ID=your_reddit_client_id
+REDDIT_CLIENT_SECRET=your_reddit_client_secret
+PORT=5000
+
+
+Run locally:
+
+npm run dev
+
+🌐 Deployment
+
+Frontend: Push the client/build folder to GitHub and host on GitHub Pages.
+
+Backend: Deploy the server folder on Render as a separate service.
+
+Important: Update the frontend API base URL to point to the Render server:
+
+const API_BASE_URL = 'https://reddit-client-portfolio.onrender.com/api';
+
+📡 API Endpoints
+Method	Endpoint	Description
+GET	/api/subreddit/:subreddit	Fetch posts for a subreddit
+GET	/api/post/:postId	Fetch post details and comments
+GET	/api/search-subreddits?q=	Fetch subreddit suggestions
+
+🎯 Usage
+
+Open the app in a browser.
+
+Type a subreddit name in the search bar – suggestions will appear.
+
+Click a suggestion or hit enter to fetch posts.
+
+Click on a post to see details and comments.
+
+Use the back button to return to the previous subreddit.
+
+🤝 Contributing
+
+Contributions are welcome!
+
+Fork the repository
+
+Create a branch (git checkout -b feature/my-feature)
+
+Commit your changes (git commit -m "Add feature")
+
+Push (git push origin feature/my-feature)
+
+Open a Pull Request
+
+📄 License
+
+MIT License
