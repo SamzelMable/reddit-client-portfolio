@@ -22,7 +22,7 @@ export const getPostDetails = async (req, res) => {
 };
 
 
-export const getSubredditSuggestionsController = async (req, res) => {
+export const getSubredditSuggestions = async (req, res) => {
   const query = req.query.q?.trim();
   if (!query) return res.json([]);
 
