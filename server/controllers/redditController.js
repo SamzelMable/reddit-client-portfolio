@@ -1,4 +1,5 @@
 import { fetchSubredditPosts, fetchPostDetails } from '../services/redditService.js';
+import fetch from 'node-fetch';
 
 export const getSubredditPosts = async (req, res) => {
   const { subreddit } = req.params;
@@ -21,9 +22,16 @@ export const getPostDetails = async (req, res) => {
 };
 
 export const getSubredditSuggestions = async (req, res) => {
-  const { q } = req.query;
+  const query = req.query.q;
+  if (!query) return res.json([]);
+
   try {
-    const suggestions = await fetchSubredditSuggestions(q);
+    const response = await fetch(`https://www.reddit.com/subreddits/search.json?q=${query}&limit=5`);
+    const data = await response.json();
+    const suggestions = data.data.children.map(child => ({
+      name: child.data.display_name,
+      icon: child.data.icon_img || child.data.community_icon || ''
+    }));
     res.json(suggestions);
   } catch (err) {
     res.status(500).json({ error: err.message });
