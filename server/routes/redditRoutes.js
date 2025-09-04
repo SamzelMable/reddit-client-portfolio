@@ -1,5 +1,5 @@
 import express from 'express';
-import { getSubredditPosts, getPostDetails } from '../controllers/redditController.js';
+import { getSubredditPosts, getPostDetails, getSubredditSuggestions } from '../controllers/redditController.js';
 
 const router = express.Router();
 
