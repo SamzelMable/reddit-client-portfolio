@@ -61,12 +61,28 @@ export const fetchPostDetails = async (postId) => {
 };
 
 export const fetchSubredditSuggestions = async (query) => {
-  const url = `https://www.reddit.com/subreddits/search.json?q=${query}&limit=5`;
-  const response = await axios.get(url);
+  try {
+    if (!query) return [];
 
-  return response.data.data.children.map((child) => ({
-    id: child.data.id,
-    name: child.data.display_name_prefixed,
-  }));
+    const token = await getAccessToken(); // use the same OAuth token
+    const response = await axios.get(
+      `https://oauth.reddit.com/subreddits/search?limit=5&q=${encodeURIComponent(query)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'User-Agent': 'reddit-client-app/1.0 (by SamzelMable)',
+        },
+      }
+    );
+
+    return response.data.data.children.map((child) => ({
+      id: child.data.id,
+      name: child.data.display_name,
+      icon: child.data.icon_img || child.data.community_icon || '',
+    }));
+  } catch (err) {
+    console.error('Error fetching subreddit suggestions:', err.message);
+    throw new Error('Failed to fetch subreddit suggestions from Reddit');
+  }
 };
 

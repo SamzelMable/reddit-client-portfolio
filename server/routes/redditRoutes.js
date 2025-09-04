@@ -10,6 +10,6 @@ router.get('/subreddit/:subreddit', getSubredditPosts);
 router.get('/post/:postId', getPostDetails);
 
 // GET /api/search-subreddits
-router.get('/search-subreddits', getSubredditSuggestions);
+router.get('/search-subreddits', getSubredditSuggestionsController);
 
 export default router;

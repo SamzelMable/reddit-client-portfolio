@@ -22,36 +22,16 @@ export const getPostDetails = async (req, res) => {
 };
 
 
-export const getSubredditSuggestions = async (req, res) => {
+export const getSubredditSuggestionsController = async (req, res) => {
   const query = req.query.q?.trim();
   if (!query) return res.json([]);
 
   try {
-    const response = await fetch(
-      `https://www.reddit.com/subreddits/search.json?q=${encodeURIComponent(query)}&limit=5`,
-      {
-        headers: {
-          'User-Agent': 'RedditClientApp/1.0 (by /u/yourusername)'
-        }
-      }
-    );
-
-    if (!response.ok) {
-      return res.status(500).json({ error: 'Failed to fetch from Reddit API' });
-    }
-
-    const data = await response.json();
-
-    const suggestions =
-      data?.data?.children?.map((child) => ({
-        name: child?.data?.display_name || '',
-        icon: child?.data?.icon_img || child?.data?.community_icon || '',
-      })) || [];
-
+    const suggestions = await fetchSubredditSuggestions(query);
     res.json(suggestions);
   } catch (err) {
-    console.error('Error fetching subreddit suggestions:', err);
-    res.status(500).json({ error: 'Server error fetching subreddit suggestions' });
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
 };
 
