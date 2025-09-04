@@ -28,17 +28,20 @@ export const getSubredditSuggestions = async (req, res) => {
 
   try {
     const response = await fetch(
-      `https://www.reddit.com/subreddits/search.json?q=${encodeURIComponent(query)}&limit=5`
+      `https://www.reddit.com/subreddits/search.json?q=${encodeURIComponent(query)}&limit=5`,
+      {
+        headers: {
+          'User-Agent': 'RedditClientApp/1.0 (by /u/yourusername)'
+        }
+      }
     );
 
-    // Make sure we got a JSON response
     if (!response.ok) {
       return res.status(500).json({ error: 'Failed to fetch from Reddit API' });
     }
 
     const data = await response.json();
 
-    // Safely map suggestions, even if children or data is missing
     const suggestions =
       data?.data?.children?.map((child) => ({
         name: child?.data?.display_name || '',
@@ -51,4 +54,5 @@ export const getSubredditSuggestions = async (req, res) => {
     res.status(500).json({ error: 'Server error fetching subreddit suggestions' });
   }
 };
+
 
