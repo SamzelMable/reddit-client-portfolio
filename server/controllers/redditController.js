@@ -1,4 +1,4 @@
-import { fetchSubredditPosts, fetchPostDetails } from '../services/redditService.js';
+import { fetchSubredditPosts, fetchPostDetails, fetchSubredditSuggestions} from '../services/redditService.js';
 import fetch from 'node-fetch';
 
 export const getSubredditPosts = async (req, res) => {
